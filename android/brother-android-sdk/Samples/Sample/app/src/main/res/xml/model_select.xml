@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:summary="Model Select"
+        android:title="Model Select">
+        <ListPreference
+            android:key="printerModel"
+            android:summary="@string/printer_model_value"
+            android:title="@string/printer_model_title" />
+        <ListPreference
+            android:enabled="true"
+            android:key="port"
+            android:summary="@string/port_value"
+            android:title="@string/port_title" />
+
+        <PreferenceScreen
+            android:defaultValue="@string/printer_text"
+            android:key="printer"
+            android:summary="@string/printer_text"
+            android:title="@string/printer_title"></PreferenceScreen>
+
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/otherSettings_title"></PreferenceCategory>
+
+    <PreferenceScreen
+        android:key="prefIpMacAddress"
+        android:summary="@string/ip_mac_value"
+        android:title="@string/ip_mac_title">
+        <EditTextPreference
+            android:enabled="true"
+            android:key="address"
+            android:summary="@string/address_value"
+            android:title="@string/address_title" />
+        <EditTextPreference
+            android:enabled="true"
+            android:key="macAddress"
+            android:summary="@string/mac_address_value"
+            android:title="@string/mac_address_title" />
+    </PreferenceScreen>
+
+    <ListPreference
+            android:entries="@array/yes_no_entries"
+            android:entryValues="@array/yes_no_value"
+            android:key="enabledTethering"
+            android:summary="@string/tethering_value"
+            android:title="@string/tethering_title" />
+
+</PreferenceScreen>

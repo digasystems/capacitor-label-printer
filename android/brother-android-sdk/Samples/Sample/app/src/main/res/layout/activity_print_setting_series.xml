@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".Activity_PrintSettingSeries">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/QL"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:longClickable="true"
+                android:onClick="tap_ql">
+
+                <TextView
+                    android:id="@+id/QL_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="14dp"
+                    android:text="QL"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="24sp" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/PT"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:longClickable="true"
+                android:onClick="tap_pt">
+
+                <TextView
+                    android:id="@+id/PT_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="14dp"
+                    android:text="PT"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="24sp" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/PJ"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:longClickable="true"
+                android:onClick="tap_pj">
+
+                <TextView
+                    android:id="@+id/PJ_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="14dp"
+                    android:text="PJ"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="24sp" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/MW"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:longClickable="true"
+                android:onClick="tap_mw">
+
+                <TextView
+                    android:id="@+id/MW_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="14dp"
+                    android:text="MW"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="24sp" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/TD"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:longClickable="true"
+                android:onClick="tap_td">
+
+                <TextView
+                    android:id="@+id/TD_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="14dp"
+                    android:text="TD"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="24sp" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/RJ"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:longClickable="true"
+                android:onClick="tap_rj">
+
+                <TextView
+                    android:id="@+id/RJ_caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="14dp"
+                    android:text="RJ"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="24sp" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

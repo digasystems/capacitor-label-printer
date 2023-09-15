@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="top"
+        android:textColor="?android:attr/textColorPrimaryInverseNoDisable"
+        android:textSize="18sp"
+        tools:layout_marginLeft="20dp" />
+
+    <EditText
+        android:id="@+id/top_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="number|numberDecimal" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="left"
+        android:textColor="?android:attr/textColorPrimaryInverseNoDisable"
+        android:textSize="18sp"
+        tools:layout_marginLeft="20dp" />
+
+    <EditText
+        android:id="@+id/left_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="number|numberDecimal" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="bottom"
+        android:textColor="?android:attr/textColorPrimaryInverseNoDisable"
+        android:textSize="18sp"
+        tools:layout_marginLeft="20dp" />
+
+    <EditText
+        android:id="@+id/bottom_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="number|numberDecimal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="right"
+        android:textColor="?android:attr/textColorPrimaryInverseNoDisable"
+        android:textSize="18sp"
+        tools:layout_marginLeft="20dp" />
+
+    <EditText
+        android:id="@+id/right_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="number|numberDecimal" />
+
+</LinearLayout>
