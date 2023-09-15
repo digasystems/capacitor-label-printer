@@ -2,6 +2,7 @@
 package com.digasystems.capacitorlabelprinter;
 
 import android.Manifest;
+import android.content.Context;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
