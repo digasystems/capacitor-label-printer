@@ -50,6 +50,15 @@ public class LabelPrinterPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void printImage(PluginCall call) {
+        final String image = call.getString("image");
+        final String ip = call.getString("ip");
+
+        implementation.printImage(image, ip);
+        call.resolve();
+    }
+
+    @PluginMethod
     public void register(PluginCall call) {
         final String type = call.getString("type");
         final String domain = call.getString("domain");

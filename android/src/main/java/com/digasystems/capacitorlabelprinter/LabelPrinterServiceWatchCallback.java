@@ -2,7 +2,7 @@ package com.digasystems.capacitorlabelprinter;
 
 import javax.jmdns.ServiceInfo;
 
-public class LabelPrinterServiceWatchCallback {
+public interface LabelPrinterServiceWatchCallback {
     String ADDED = "added";
     String REMOVED = "removed";
     String RESOLVED = "resolved";
