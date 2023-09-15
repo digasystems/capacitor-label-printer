@@ -3,6 +3,7 @@ import { WebPlugin } from '@capacitor/core';
 import type {
   CallbackID,
   LabelPrinterPlugin,
+  LabelPrinterPrintImageRequest,
   LabelPrinterRegisterRequest,
   LabelPrinterUnregisterRequest,
   LabelPrinterUnwatchRequest,
@@ -14,6 +15,10 @@ const errorString = 'The plugin is not available on this platform';
 const errorFn = Promise.reject(errorString);
 
 export class LabelPrinterWeb extends WebPlugin implements LabelPrinterPlugin {
+  printImage(_request: LabelPrinterPrintImageRequest): Promise<any> {
+    return errorFn;
+  }
+
   getHostname(): Promise<{ hostname: string }> {
     return errorFn;
   }

@@ -2,6 +2,11 @@ import type { PluginListenerHandle } from '@capacitor/core';
 
 export type CallbackID = string;
 
+export interface LabelPrinterPrintImageRequest {
+  ip: string;
+  image: string;
+}
+
 export interface LabelPrinterWatchRequest {
   type: string;
   domain: string;
@@ -39,6 +44,7 @@ export type LabelPrinterWatchCallback = (event: LabelPrinterWatchResult) => void
 export interface LabelPrinterPlugin {
   addListener(eventName: 'discover', listenerFunc: (result: LabelPrinterWatchResult) => void): PluginListenerHandle;
   getHostname(): Promise<{ hostname: string }>;
+  printImage(_request: LabelPrinterPrintImageRequest): Promise<void>;
   register(request: LabelPrinterRegisterRequest): Promise<void>;
   unregister(request: LabelPrinterUnregisterRequest): Promise<void>;
   stop(): Promise<void>;

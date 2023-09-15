@@ -1,4 +1,5 @@
 import Foundation
+import BRLMPrinterKit
 
 @objc public enum LabelPrinterPublisherAction: Int {
     case added
@@ -10,6 +11,18 @@ import Foundation
 @objc public class LabelPrinter: NSObject {
     fileprivate var publishers: [String: Publisher] = [:]
     fileprivate var browsers: [String: Browser] = [:]
+
+    @objc public func printImage(image: String, ip: String) -> Void {
+        let channel = BRLMChannel(wifiIPAddress: "IP address")
+        let generateResult = BRLMPrinterDriverGenerator.open(channel)
+
+        // image is base64
+
+        let printSettings = BRLMQLPrintSettings(defaultPrintSettingsWith: .QL_820NWB)
+        printSettings.labelSize = .dieCutW17H54
+        let printError = printerDriver.printImage(with: url, settings: printSettings)
+
+    }
 
     @objc public func getHostname() -> String {
         let capacity = 128

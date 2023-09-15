@@ -10,6 +10,14 @@ public class LabelPrinterPlugin: CAPPlugin {
         call.resolve(["hostname": value])
     }
 
+    @objc func printImage(_ call: CAPPluginCall) {
+        let image = call.getString("image")
+        let ip = call.getString("ip")
+
+        let value = implementation.printImage(image, ip)
+        call.resolve()
+    }
+
     @objc func register(_ call: CAPPluginCall) {
         let typeParam = call.getString("type")
         let domainParam = call.getString("domain")
