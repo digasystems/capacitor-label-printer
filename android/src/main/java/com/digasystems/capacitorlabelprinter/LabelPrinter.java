@@ -1,14 +1,10 @@
 package com.digasystems.capacitorlabelprinter;
 
-
-import static android.content.Context.WIFI_SERVICE;
-
 // Android imports
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -23,12 +19,8 @@ import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -44,27 +36,23 @@ import com.brother.sdk.lmprinter.PrinterDriverGenerator;
 import com.brother.sdk.lmprinter.setting.QLPrintSettings;
 
 // JmDNS imports
-import javax.jmdns.JmDNS;
-import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
-import javax.jmdns.ServiceListener;
+
 
 public class LabelPrinter {
 
     private static final String TAG = "LabelPrinter";
 
-    WifiManager.MulticastLock lock;
     private List<InetAddress> addresses;
     private List<InetAddress> ipv6Addresses;
     private List<InetAddress> ipv4Addresses;
     private String hostname;
     private RegistrationManager registrationManager;
     private BrowserManager browserManager;
+    private Activity activity;
 
     public void initialize(Activity activity) {
-        WifiManager wifi = (WifiManager) activity.getApplicationContext().getSystemService(WIFI_SERVICE);
-        lock = wifi.createMulticastLock("LabelPrinterPluginLock");
-        lock.setReferenceCounted(false);
+        this.activity = activity;
 
         try {
             addresses = new CopyOnWriteArrayList<>();
@@ -119,8 +107,8 @@ public class LabelPrinter {
         }
         PrinterDriver printerDriver = result.getDriver();
 
-        QLPrintSettings printSettings = new QLPrintSettings(PrinterModel.QL_810W);
-        printSettings.setLabelSize(QLPrintSettings.LabelSize.RollW103);
+        QLPrintSettings printSettings = new QLPrintSettings(PrinterModel.QL_810W); // printer
+        printSettings.setLabelSize(QLPrintSettings.LabelSize.RollW103); // label
 
         byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -183,7 +171,7 @@ public class LabelPrinter {
             } else if ("ipv4".equalsIgnoreCase(addressFamily)) {
                 selectedAddresses = ipv4Addresses;
             }
-            browserManager = new BrowserManager(selectedAddresses, hostname);
+            browserManager = new BrowserManager(activity, selectedAddresses, hostname);
             browserManager.watch(type, domain, callback);
         }
     }
@@ -202,134 +190,6 @@ public class LabelPrinter {
             final BrowserManager bm = browserManager;
             browserManager = null;
             bm.close();
-        }
-    }
-
-    private static class RegistrationManager {
-
-        private final List<JmDNS> publishers = new ArrayList<>();
-
-        public RegistrationManager(List<InetAddress> addresses, String hostname) throws IOException {
-            if (addresses == null || addresses.size() == 0) {
-                publishers.add(JmDNS.create(null, hostname));
-            } else {
-                for (InetAddress address : addresses) {
-                    publishers.add(JmDNS.create(address, hostname));
-                }
-            }
-        }
-
-        public ServiceInfo register(String type, String domain, String name, int port, JSObject props) throws IOException {
-            HashMap<String, String> txtRecord = new HashMap<>();
-            if (props != null) {
-                Iterator<String> iterator = props.keys();
-                while (iterator.hasNext()) {
-                    String key = iterator.next();
-                    txtRecord.put(key, props.getString(key));
-                }
-            }
-
-            ServiceInfo aService = null;
-            for (JmDNS publisher : publishers) {
-                ServiceInfo service = ServiceInfo.create(type + domain, name, port, 0, 0, txtRecord);
-                try {
-                    publisher.registerService(service);
-                    aService = service;
-                } catch (IOException e) {
-                    Log.e(TAG, e.getMessage(), e);
-                }
-            }
-            // returns only one of the ServiceInfo instances!
-            return aService;
-        }
-
-        public void unregister(String type, String domain, String name) {
-            for (JmDNS publisher : publishers) {
-                ServiceInfo serviceInfo = publisher.getServiceInfo(type + domain, name, 5000);
-                if (serviceInfo != null) {
-                    publisher.unregisterService(serviceInfo);
-                }
-            }
-        }
-
-        public void stop() throws IOException {
-            for (JmDNS publisher : publishers) {
-                publisher.close();
-            }
-        }
-    }
-
-    private class BrowserManager implements ServiceListener {
-
-        private final List<JmDNS> browsers = new ArrayList<>();
-
-        private final Map<String, LabelPrinterServiceWatchCallback> calls = new HashMap<>();
-
-        public BrowserManager(List<InetAddress> addresses, String hostname) throws IOException {
-            lock.acquire();
-
-            if (addresses == null || addresses.size() == 0) {
-                browsers.add(JmDNS.create(null, hostname));
-            } else {
-                for (InetAddress address : addresses) {
-                    browsers.add(JmDNS.create(address, hostname));
-                }
-            }
-        }
-
-        private void watch(String type, String domain, LabelPrinterServiceWatchCallback callback) {
-            calls.put(type + domain, callback);
-
-            for (JmDNS browser : browsers) {
-                browser.addServiceListener(type + domain, this);
-            }
-        }
-
-        private void unwatch(String type, String domain) {
-            calls.remove(type + domain);
-
-            for (JmDNS browser : browsers) {
-                browser.removeServiceListener(type + domain, this);
-            }
-        }
-
-        private void close() throws IOException {
-            lock.release();
-
-            calls.clear();
-
-            for (JmDNS browser : browsers) {
-                browser.close();
-            }
-        }
-
-        @Override
-        public void serviceResolved(ServiceEvent ev) {
-            Log.d(TAG, "Resolved");
-
-            sendCallback(LabelPrinterServiceWatchCallback.RESOLVED, ev.getInfo());
-        }
-
-        @Override
-        public void serviceRemoved(ServiceEvent ev) {
-            Log.d(TAG, "Removed");
-
-            sendCallback(LabelPrinterServiceWatchCallback.REMOVED, ev.getInfo());
-        }
-
-        @Override
-        public void serviceAdded(ServiceEvent ev) {
-            Log.d(TAG, "Added");
-
-            sendCallback(LabelPrinterServiceWatchCallback.ADDED, ev.getInfo());
-        }
-
-        public void sendCallback(String action, ServiceInfo service) {
-            LabelPrinterServiceWatchCallback callback = calls.get(service.getType());
-            if (callback == null) {
-                return;
-            }
-            callback.serviceBrowserEvent(action, service);
         }
     }
 
