@@ -5,6 +5,8 @@ export type CallbackID = string;
 export interface LabelPrinterPrintImageRequest {
   ip: string;
   image: string;
+  printer: string;
+  label: string;
 }
 
 export interface LabelPrinterWatchRequest {

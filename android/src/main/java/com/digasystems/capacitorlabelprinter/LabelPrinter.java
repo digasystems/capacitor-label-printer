@@ -109,7 +109,7 @@ public class LabelPrinter {
         return hostname;
     }
 
-    public void printImage(String image, String ip) {
+    public void printImage(String image, String ip, String printer, String label) {
         Channel channel = Channel.newWifiChannel(ip);
 
         PrinterDriverGenerateResult result = PrinterDriverGenerator.openChannel(channel);

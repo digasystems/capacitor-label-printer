@@ -12,16 +12,19 @@ import BRLMPrinterKit
     fileprivate var publishers: [String: Publisher] = [:]
     fileprivate var browsers: [String: Browser] = [:]
 
-    @objc public func printImage(image: String, ip: String) -> Void {
+    @objc public func printImage(image: String, ip: String, printer: String, label: String) -> Void {
         let channel = BRLMChannel(wifiIPAddress: "IP address")
         let generateResult = BRLMPrinterDriverGenerator.open(channel)
 
         // image is base64
 
-        let printSettings = BRLMQLPrintSettings(defaultPrintSettingsWith: .QL_820NWB)
-        printSettings.labelSize = .dieCutW17H54
+        let printSettings = BRLMQLPrintSettings(defaultPrintSettingsWith: .QL_820NWB) // printer
+        printSettings.labelSize = .dieCutW17H54 // label
         let printError = printerDriver.printImage(with: url, settings: printSettings)
 
+        if printError.code != .noError {
+            alert(title: "Error", message: "Print Image: \(String(describing: printError.code.rawValue))")
+        }
     }
 
     @objc public func getHostname() -> String {

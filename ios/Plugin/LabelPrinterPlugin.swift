@@ -13,8 +13,10 @@ public class LabelPrinterPlugin: CAPPlugin {
     @objc func printImage(_ call: CAPPluginCall) {
         let image = call.getString("image")
         let ip = call.getString("ip")
+        let printer = call.getString("printer")
+        let label = call.getString("label")
 
-        let value = implementation.printImage(image, ip)
+        let value = implementation.printImage(image, ip, printer, label)
         call.resolve()
     }
 

@@ -53,8 +53,10 @@ public class LabelPrinterPlugin extends Plugin {
     public void printImage(PluginCall call) {
         final String image = call.getString("image");
         final String ip = call.getString("ip");
+        final String printer = call.getString("printer");
+        final String label = call.getString("label");
 
-        implementation.printImage(image, ip);
+        implementation.printImage(image, ip, printer, label);
         call.resolve();
     }
 

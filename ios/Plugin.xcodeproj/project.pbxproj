@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51600BF52850917000E6DA4A /* BRLMPrinterKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51600BF42850917000E6DA4A /* BRLMPrinterKit.xcframework */; };
+		51600BF62850917000E6DA4A /* BRLMPrinterKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 51600BF42850917000E6DA4A /* BRLMPrinterKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03FC29A292ACC40490383A1F /* Pods_Plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */; };
 		20C0B05DCFC8E3958A738AF2 /* Pods_PluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6753A823D3815DB436415E3 /* Pods_PluginTests.framework */; };
 		2F98D68224C9AAE500613A4C /* LabelPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F98D68124C9AAE400613A4C /* LabelPrinter.swift */; };
@@ -17,6 +19,20 @@
 		50ADFFA82020EE4F00D50D53 /* LabelPrinterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFFA72020EE4F00D50D53 /* LabelPrinterPlugin.m */; };
 		50E1A94820377CB70090CE1A /* LabelPrinterPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1A94720377CB70090CE1A /* LabelPrinterPlugin.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5130C7862844AA9700B5472A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				51600BF62850917000E6DA4A /* BRLMPrinterKit.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXContainerItemProxy section */
 		50ADFF93201F53D600D50D53 /* PBXContainerItemProxy */ = {
@@ -29,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		51600BF42850917000E6DA4A /* BRLMPrinterKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BRLMPrinterKit.xcframework; path = ../libs/BRLMPrinterKit.xcframework; sourceTree = "<group>"; };
 		2F98D68124C9AAE400613A4C /* LabelPrinter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelPrinter.swift; sourceTree = "<group>"; };
 		3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFF88201F53D600D50D53 /* Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +80,14 @@
 			files = (
 				50ADFF92201F53D600D50D53 /* Plugin.framework in Frameworks */,
 				20C0B05DCFC8E3958A738AF2 /* Pods_PluginTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51BDEA29284465B6006B6F12 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51600BF52850917000E6DA4A /* BRLMPrinterKit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +152,14 @@
 				50ADFFA52020D75100D50D53 /* Capacitor.framework */,
 				3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */,
 				F6753A823D3815DB436415E3 /* Pods_PluginTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		51BDEA4328446633006B6F12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				51600BF42850917000E6DA4A /* BRLMPrinterKit.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
