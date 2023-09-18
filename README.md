@@ -20,6 +20,7 @@ npx cap sync
 
 * [`addListener('discover', ...)`](#addlistenerdiscover)
 * [`getHostname()`](#gethostname)
+* [`printImage(...)`](#printimage)
 * [`register(...)`](#register)
 * [`unregister(...)`](#unregister)
 * [`stop()`](#stop)
@@ -57,6 +58,19 @@ getHostname() => Promise<{ hostname: string; }>
 ```
 
 **Returns:** <code>Promise&lt;{ hostname: string; }&gt;</code>
+
+--------------------
+
+
+### printImage(...)
+
+```typescript
+printImage(_request: LabelPrinterPrintImageRequest) => Promise<void>
+```
+
+| Param          | Type                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------- |
+| **`_request`** | <code><a href="#labelprinterprintimagerequest">LabelPrinterPrintImageRequest</a></code> |
 
 --------------------
 
@@ -158,6 +172,16 @@ close() => Promise<void>
 | **`txtRecord`**     | <code>{ [key: string]: string; }</code> |
 
 
+#### LabelPrinterPrintImageRequest
+
+| Prop          | Type                |
+| ------------- | ------------------- |
+| **`ip`**      | <code>string</code> |
+| **`image`**   | <code>string</code> |
+| **`printer`** | <code>string</code> |
+| **`label`**   | <code>string</code> |
+
+
 #### LabelPrinterRegisterRequest
 
 | Prop        | Type                                    |
@@ -186,7 +210,7 @@ close() => Promise<void>
 
 #### LabelPrinterWatchResult
 
-<code>{ action: <a href="#labelprinterwatchaction">LabelPrinterWatchAction</a>; service: <a href="#labelprinterservice">LabelPrinterService</a>; }</code>
+<code>{ action: <a href="#labelprinterwatchaction">LabelPrinterWatchAction</a>; service: <a href="#labelprinterservice">LabelPrinterService</a>; }</code>
 
 
 #### LabelPrinterWatchAction
