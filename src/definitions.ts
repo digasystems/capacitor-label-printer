@@ -1,4 +1,4 @@
-import type { PluginListenerHandle } from '@capacitor/core';
+import { PluginListenerHandle } from '@capacitor/core';
 
 export type CallbackID = string;
 
@@ -15,15 +15,6 @@ export interface LabelPrinterWatchRequest {
 }
 
 export type LabelPrinterUnwatchRequest = LabelPrinterWatchRequest;
-
-export interface LabelPrinterUnregisterRequest extends LabelPrinterWatchRequest {
-  name: string;
-}
-
-export interface LabelPrinterRegisterRequest extends LabelPrinterUnregisterRequest {
-  port: number;
-  props: { [key: string]: string };
-}
 
 export interface LabelPrinterService {
   domain: string;
@@ -44,13 +35,13 @@ export type LabelPrinterWatchResult = {
 export type LabelPrinterWatchCallback = (event: LabelPrinterWatchResult) => void;
 
 export interface LabelPrinterPlugin {
-  addListener(eventName: 'discover', listenerFunc: (result: LabelPrinterWatchResult) => void): PluginListenerHandle;
-  getHostname(): Promise<{ hostname: string }>;
   printImage(_request: LabelPrinterPrintImageRequest): Promise<void>;
-  register(request: LabelPrinterRegisterRequest): Promise<void>;
-  unregister(request: LabelPrinterUnregisterRequest): Promise<void>;
-  stop(): Promise<void>;
   watch(request: LabelPrinterWatchRequest, callback?: LabelPrinterWatchCallback): Promise<CallbackID>;
   unwatch(request: LabelPrinterUnwatchRequest): Promise<void>;
   close(): Promise<void>;
+  addListener(
+    eventName: 'serviceDiscovered',
+    listenerFunc: (orientation: LabelPrinterWatchResult) => void,
+  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  removeAllListeners(): Promise<void>;
 }

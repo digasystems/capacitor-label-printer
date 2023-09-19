@@ -9,7 +9,6 @@ import BRLMPrinterKit
 }
 
 @objc public class LabelPrinter: NSObject {
-    fileprivate var publishers: [String: Publisher] = [:]
     fileprivate var browsers: [String: Browser] = [:]
 
     @objc public func printImage(image: String, ip: String, printer: String, label: String) -> Void {
@@ -25,60 +24,6 @@ import BRLMPrinterKit
         if printError.code != .noError {
             alert(title: "Error", message: "Print Image: \(String(describing: printError.code.rawValue))")
         }
-    }
-
-    @objc public func getHostname() -> String {
-        let capacity = 128
-        let hostname = UnsafeMutablePointer<CChar>.allocate(capacity: capacity)
-        gethostname(hostname, capacity)
-        #if DEBUG
-        print("LabelPrinter: hostname \(hostname)")
-        #endif
-
-        #if DEBUG
-        print("LabelPrinter: hostname \(hostname)")
-        #endif
-
-        return String(cString: hostname)
-    }
-
-    @objc public func registerService(type: String, domain: String, name: String, port: Int, props: [String: String], addressFamily: String, callback: @escaping (Bool, [String: NSNumber]?) -> Void) {
-        #if DEBUG
-        print("LabelPrinter: register \(name + "." + type + domain)")
-        #endif
-
-        var txtRecord: [String: Data]?
-        txtRecord = [:]
-        for (key, value) in props {
-            txtRecord?[key] = value.data(using: String.Encoding.utf8)
-        }
-        let publisher = Publisher(withDomain: domain, withType: type, withName: name, withPort: port, withTxtRecord: txtRecord)
-        publishers[name + "." + type + domain] = publisher
-        publisher.register(callback)
-    }
-
-    @objc public func unregisterService(type: String, domain: String, name: String, callback: @escaping (Bool) -> Void) {
-        #if DEBUG
-        print("LabelPrinter: unregister \(name + "." + type + domain)")
-        #endif
-
-        if let publisher = publishers[name + "." + type + domain] {
-            publisher.unregister(callback)
-            publishers.removeValue(forKey: name + "." + type + domain)
-        } else {
-            callback(true)
-        }
-    }
-
-    @objc public func stop() {
-        #if DEBUG
-        print("LabelPrinter: stop")
-        #endif
-
-        for (_, publisher) in publishers {
-            publisher.unregister(nil)
-        }
-        publishers.removeAll()
     }
 
     @objc public func watch(type: String, domain: String, callback: @escaping (LabelPrinterPublisherAction, NetService?, [String: NSNumber]?) -> Void) {
@@ -108,83 +53,6 @@ import BRLMPrinterKit
             browser.unwatch(nil)
         }
         browsers.removeAll()
-    }
-
-    internal class Publisher: NSObject, NetServiceDelegate {
-
-        var nsp: NetService?
-        var domain: String
-        var type: String
-        var name: String
-        var port: Int
-        var txtRecord: [String: Data]?
-        var registerCallback: ((Bool, [String: NSNumber]?) -> Void)?
-        var unregisterCallback: ((Bool) -> Void)?
-
-        init (withDomain domain: String, withType type: String, withName name: String, withPort port: Int, withTxtRecord txtRecord: [String: Data]?) {
-            self.domain = domain
-            self.type = type
-            self.name = name
-            self.port = port
-            self.txtRecord = txtRecord
-        }
-
-        func register(_ registerCallback: @escaping (Bool, [String: NSNumber]?) -> Void) {
-            self.registerCallback = registerCallback
-
-            // Netservice
-            let service = NetService(domain: domain, type: type, name: name, port: Int32(port))
-            nsp = service
-            service.delegate = self
-
-            if let record = txtRecord {
-                if record.count > 0 {
-                    service.setTXTRecord(NetService.data(fromTXTRecord: record))
-                }
-            }
-
-            service.publish()
-
-        }
-
-        func unregister(_ unregisterCallback: ((Bool) -> Void)?) {
-            self.unregisterCallback = unregisterCallback
-            if let service = nsp {
-                service.stop()
-            }
-
-        }
-
-        func destroy() {
-
-            if let service = nsp {
-                service.stop()
-            }
-
-        }
-
-        @objc func netServiceDidPublish(_ netService: NetService) {
-            #if DEBUG
-            print("LabelPrinter: netService:didPublish:\(netService)")
-            #endif
-
-            registerCallback?(true, nil)
-        }
-
-        @objc func netService(_ netService: NetService, didNotPublish errorDict: [String: NSNumber]) {
-            #if DEBUG
-            print("LabelPrinter: netService:didNotPublish:\(netService) \(errorDict)")
-            #endif
-
-            registerCallback?(false, errorDict)
-        }
-
-        @objc func netServiceDidStop(_ netService: NetService) {
-            nsp = nil
-
-            unregisterCallback?(true)
-        }
-
     }
 
     internal class Browser: NSObject, NetServiceDelegate, NetServiceBrowserDelegate {

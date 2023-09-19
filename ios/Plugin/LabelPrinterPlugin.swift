@@ -5,11 +5,6 @@ import Capacitor
 public class LabelPrinterPlugin: CAPPlugin {
     private let implementation = LabelPrinter()
 
-    @objc func getHostname(_ call: CAPPluginCall) {
-        let value = implementation.getHostname()
-        call.resolve(["hostname": value])
-    }
-
     @objc func printImage(_ call: CAPPluginCall) {
         let image = call.getString("image")
         let ip = call.getString("ip")
@@ -18,76 +13,6 @@ public class LabelPrinterPlugin: CAPPlugin {
 
         let value = implementation.printImage(image, ip, printer, label)
         call.resolve()
-    }
-
-    @objc func register(_ call: CAPPluginCall) {
-        let typeParam = call.getString("type")
-        let domainParam = call.getString("domain")
-        let nameParam = call.getString("name")
-        let portParam = call.getInt("port")
-        let propsObjParam = call.getObject("props")
-        let addressFamilyParam = call.getString("addressFamily")
-
-        guard let type = typeParam,
-              let domain = domainParam,
-              let name = nameParam,
-              let port = portParam,
-              let propsObj = propsObjParam,
-              let addressFamily = addressFamilyParam else {
-            call.reject("Invalid parameters")
-            return
-        }
-
-        var props: [String: String] = [:]
-        propsObj.keys.forEach { key in
-            if let value = propsObj[key] as? String {
-                props[key] = value
-            }
-        }
-
-        func callback(registered: Bool, error: [String: NSNumber]?) {
-            if registered {
-                call.resolve()
-            } else {
-                call.reject(error?.keys.joined(separator: ",") ?? "")
-            }
-        }
-
-        DispatchQueue.main.async {
-            self.implementation.registerService(
-                type: type,
-                domain: domain,
-                name: name,
-                port: port,
-                props: props,
-                addressFamily:
-                    addressFamily,
-                callback: callback
-            )
-        }
-    }
-
-    @objc func unregister(_ call: CAPPluginCall) {
-        let typeParam = call.getString("type")
-        let domainParam = call.getString("domain")
-        let nameParam = call.getString("name")
-
-        guard let type = typeParam, let domain = domainParam, let name = nameParam else {
-            call.reject("Invalid parameters")
-            return
-        }
-
-        func callback(unregistered: Bool) {
-            if unregistered {
-                call.resolve()
-            } else {
-                call.reject("")
-            }
-        }
-
-        DispatchQueue.main.async {
-            self.implementation.unregisterService(type: type, domain: domain, name: name, callback: callback)
-        }
     }
 
     @objc func stop(_ call: CAPPluginCall) {

@@ -4,8 +4,6 @@ import type {
   CallbackID,
   LabelPrinterPlugin,
   LabelPrinterPrintImageRequest,
-  LabelPrinterRegisterRequest,
-  LabelPrinterUnregisterRequest,
   LabelPrinterUnwatchRequest,
   LabelPrinterWatchCallback,
   LabelPrinterWatchRequest,
@@ -18,26 +16,11 @@ export class LabelPrinterWeb extends WebPlugin implements LabelPrinterPlugin {
   printImage(_request: LabelPrinterPrintImageRequest): Promise<any> {
     return errorFn;
   }
-
-  getHostname(): Promise<{ hostname: string }> {
-    return errorFn;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  register(_request: LabelPrinterRegisterRequest): Promise<void> {
-    return errorFn;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  unregister(_request: LabelPrinterUnregisterRequest): Promise<void> {
-    return errorFn;
-  }
-  stop(): Promise<void> {
-    return errorFn;
-  }
   watch(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _request: LabelPrinterWatchRequest,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _callback: LabelPrinterWatchCallback
+    _callback: LabelPrinterWatchCallback,
   ): Promise<CallbackID> {
     return errorFn;
   }

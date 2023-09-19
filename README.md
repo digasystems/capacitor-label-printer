@@ -18,15 +18,12 @@ npx cap sync
 
 <docgen-index>
 
-* [`addListener('discover', ...)`](#addlistenerdiscover)
-* [`getHostname()`](#gethostname)
 * [`printImage(...)`](#printimage)
-* [`register(...)`](#register)
-* [`unregister(...)`](#unregister)
-* [`stop()`](#stop)
 * [`watch(...)`](#watch)
 * [`unwatch(...)`](#unwatch)
 * [`close()`](#close)
+* [`addListener('serviceDiscovered', ...)`](#addlistenerservicediscovered)
+* [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 
@@ -34,33 +31,6 @@ npx cap sync
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
-
-### addListener('discover', ...)
-
-```typescript
-addListener(eventName: 'discover', listenerFunc: (result: LabelPrinterWatchResult) => void) => PluginListenerHandle
-```
-
-| Param              | Type                                                                                             |
-| ------------------ | ------------------------------------------------------------------------------------------------ |
-| **`eventName`**    | <code>'discover'</code>                                                                          |
-| **`listenerFunc`** | <code>(result: <a href="#labelprinterwatchresult">LabelPrinterWatchResult</a>) =&gt; void</code> |
-
-**Returns:** <code><a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
-
---------------------
-
-
-### getHostname()
-
-```typescript
-getHostname() => Promise<{ hostname: string; }>
-```
-
-**Returns:** <code>Promise&lt;{ hostname: string; }&gt;</code>
-
---------------------
-
 
 ### printImage(...)
 
@@ -71,41 +41,6 @@ printImage(_request: LabelPrinterPrintImageRequest) => Promise<void>
 | Param          | Type                                                                                    |
 | -------------- | --------------------------------------------------------------------------------------- |
 | **`_request`** | <code><a href="#labelprinterprintimagerequest">LabelPrinterPrintImageRequest</a></code> |
-
---------------------
-
-
-### register(...)
-
-```typescript
-register(request: LabelPrinterRegisterRequest) => Promise<void>
-```
-
-| Param         | Type                                                                                |
-| ------------- | ----------------------------------------------------------------------------------- |
-| **`request`** | <code><a href="#labelprinterregisterrequest">LabelPrinterRegisterRequest</a></code> |
-
---------------------
-
-
-### unregister(...)
-
-```typescript
-unregister(request: LabelPrinterUnregisterRequest) => Promise<void>
-```
-
-| Param         | Type                                                                                    |
-| ------------- | --------------------------------------------------------------------------------------- |
-| **`request`** | <code><a href="#labelprinterunregisterrequest">LabelPrinterUnregisterRequest</a></code> |
-
---------------------
-
-
-### stop()
-
-```typescript
-stop() => Promise<void>
-```
 
 --------------------
 
@@ -148,14 +83,50 @@ close() => Promise<void>
 --------------------
 
 
+### addListener('serviceDiscovered', ...)
+
+```typescript
+addListener(eventName: 'serviceDiscovered', listenerFunc: (orientation: LabelPrinterWatchResult) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
+```
+
+| Param              | Type                                                                                                  |
+| ------------------ | ----------------------------------------------------------------------------------------------------- |
+| **`eventName`**    | <code>'serviceDiscovered'</code>                                                                      |
+| **`listenerFunc`** | <code>(orientation: <a href="#labelprinterwatchresult">LabelPrinterWatchResult</a>) =&gt; void</code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+
+--------------------
+
+
+### removeAllListeners()
+
+```typescript
+removeAllListeners() => Promise<void>
+```
+
+--------------------
+
+
 ### Interfaces
 
 
-#### PluginListenerHandle
+#### LabelPrinterPrintImageRequest
 
-| Prop         | Type                                      |
-| ------------ | ----------------------------------------- |
-| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
+| Prop          | Type                |
+| ------------- | ------------------- |
+| **`ip`**      | <code>string</code> |
+| **`image`**   | <code>string</code> |
+| **`printer`** | <code>string</code> |
+| **`label`**   | <code>string</code> |
+
+
+#### LabelPrinterWatchRequest
+
+| Prop         | Type                |
+| ------------ | ------------------- |
+| **`type`**   | <code>string</code> |
+| **`domain`** | <code>string</code> |
 
 
 #### LabelPrinterService
@@ -172,40 +143,19 @@ close() => Promise<void>
 | **`txtRecord`**     | <code>{ [key: string]: string; }</code> |
 
 
-#### LabelPrinterPrintImageRequest
+#### PluginListenerHandle
 
-| Prop          | Type                |
-| ------------- | ------------------- |
-| **`ip`**      | <code>string</code> |
-| **`image`**   | <code>string</code> |
-| **`printer`** | <code>string</code> |
-| **`label`**   | <code>string</code> |
-
-
-#### LabelPrinterRegisterRequest
-
-| Prop        | Type                                    |
-| ----------- | --------------------------------------- |
-| **`port`**  | <code>number</code>                     |
-| **`props`** | <code>{ [key: string]: string; }</code> |
-
-
-#### LabelPrinterUnregisterRequest
-
-| Prop       | Type                |
-| ---------- | ------------------- |
-| **`name`** | <code>string</code> |
-
-
-#### LabelPrinterWatchRequest
-
-| Prop         | Type                |
-| ------------ | ------------------- |
-| **`type`**   | <code>string</code> |
-| **`domain`** | <code>string</code> |
+| Prop         | Type                                      |
+| ------------ | ----------------------------------------- |
+| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 
 ### Type Aliases
+
+
+#### LabelPrinterWatchCallback
+
+<code>(event: <a href="#labelprinterwatchresult">LabelPrinterWatchResult</a>): void</code>
 
 
 #### LabelPrinterWatchResult
@@ -216,11 +166,6 @@ close() => Promise<void>
 #### LabelPrinterWatchAction
 
 <code>'added' | 'removed' | 'resolved'</code>
-
-
-#### LabelPrinterWatchCallback
-
-<code>(event: <a href="#labelprinterwatchresult">LabelPrinterWatchResult</a>): void</code>
 
 
 #### CallbackID

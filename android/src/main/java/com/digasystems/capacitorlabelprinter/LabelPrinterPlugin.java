@@ -34,19 +34,7 @@ public class LabelPrinterPlugin extends Plugin {
 
     @Override
     public void load() {
-        implementation.initialize(getActivity());
-    }
-
-    @PluginMethod
-    public void getHostname(PluginCall call) {
-        String hostname = implementation.getHostname();
-        if (hostname != null) {
-            JSObject result = new JSObject();
-            result.put("hostname", hostname);
-            call.resolve(result);
-        } else {
-            call.reject("Error: undefined hostname");
-        }
+        implementation.initialize(getActivity(), this);
     }
 
     @PluginMethod
@@ -58,55 +46,6 @@ public class LabelPrinterPlugin extends Plugin {
 
         implementation.printImage(image, ip, printer, label);
         call.resolve();
-    }
-
-    @PluginMethod
-    public void register(PluginCall call) {
-        final String type = call.getString("type");
-        final String domain = call.getString("domain");
-        final String name = call.getString("name");
-        final int port = call.getInt("port");
-        final JSObject props = call.getObject("props");
-        final String addressFamily = call.getString("addressFamily");
-
-        getBridge()
-            .executeOnMainThread(() -> {
-                try {
-                    ServiceInfo service = implementation.registerService(type, domain, name, port, props, addressFamily);
-                    JSObject status = new JSObject();
-                    status.put("action", "registered");
-                    status.put("service", jsonifyService(service));
-
-                    call.resolve(status);
-                } catch (IOException | RuntimeException e) {
-                    call.reject(e.getMessage());
-                }
-            });
-    }
-
-    @PluginMethod
-    public void unregister(PluginCall call) {
-        final String type = call.getString("type");
-        final String domain = call.getString("domain");
-        final String name = call.getString("name");
-
-        getBridge()
-            .executeOnMainThread(() -> {
-                implementation.unregisterService(type, domain, name);
-                call.resolve();
-            });
-    }
-
-    @PluginMethod
-    public void stop(PluginCall call) {
-        getBridge()
-            .executeOnMainThread(() -> {
-                try {
-                    implementation.stop();
-                } catch (IOException e) {
-                    call.reject("Error: " + e.getMessage());
-                }
-            });
     }
 
     @PluginMethod(returnType = PluginMethod.RETURN_CALLBACK)
@@ -163,6 +102,10 @@ public class LabelPrinterPlugin extends Plugin {
                     call.reject("Error: " + e.getMessage());
                 }
             });
+    }
+
+    public void notifyListeners(JSObject ret) {
+        notifyListeners("serviceDiscovered", ret);
     }
 
     private static JSObject jsonifyService(ServiceInfo service) {
