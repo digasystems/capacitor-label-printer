@@ -1,79 +1,43 @@
 {
-  "name": "@digasystems/capacitor-label-printer",
-  "version": "0.0.1",
-  "description": "Provide a native interface to label printers",
-  "main": "dist/plugin.cjs.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
-  "unpkg": "dist/plugin.js",
-  "type": "module",
-  "files": [
-    "android/src/main/",
-    "android/build.gradle",
-    "dist/",
-    "ios/Plugin/",
-    "DigasystemsCapacitorLabelPrinter.podspec"
-  ],
-  "author": "Angrigo",
-  "license": "MIT",
+  "name": "cordova-plugin-brother-label-printer",
+  "version": "1.7.0",
+  "description": "Cordova and Capacitor plugin for brother label printers",
+  "cordova": {
+    "id": "cordova-plugin-brother-label-printer",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/digasystems/capacitor-label-printer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/digasystems/capacitor-label-printer/issues"
+    "url": "git+https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer.git"
   },
   "keywords": [
-    "capacitor",
-    "plugin",
-    "native"
+    "brother",
+    "print",
+    "sdk",
+    "label",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
   ],
-  "scripts": {
-    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
-    "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin -destination generic/platform=iOS && cd ..",
-    "verify:android": "cd android && ./gradlew clean build test && cd ..",
-    "verify:web": "npm run build",
-    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
-    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
-    "eslint": "eslint . --ext ts",
-    "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
-    "swiftlint": "node-swiftlint",
-    "docgen": "docgen --api LabelPrinterPlugin --output-readme README.md --output-json dist/docs.json",
-    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
-    "clean": "rimraf ./dist",
-    "watch": "tsc --watch",
-    "prepublishOnly": "npm run build"
+  "engines": {
+    "cordova": ">=3.6.0",
+    "cordova-android": ">=6.0.0",
+    "android-sdk": ">=26",
+    "apple-ios": ">=10.0.0"
   },
-  "devDependencies": {
-    "@capacitor/android": "^5.4.0",
-    "@capacitor/core": "^5.4.0",
-    "@capacitor/docgen": "^0.2.1",
-    "@capacitor/ios": "^5.4.0",
-    "@ionic/eslint-config": "^0.3.0",
-    "@ionic/prettier-config": "^4.0.0",
-    "@ionic/swiftlint-config": "^1.1.2",
-    "eslint": "^8.49.0",
-    "prettier": "~3.0.3",
-    "prettier-plugin-java": "~2.3.1",
-    "rimraf": "^5.0.1",
-    "rollup": "^3.29.1",
-    "swiftlint": "^1.0.2",
-    "typescript": "~5.2.2"
-  },
-  "peerDependencies": {
-    "@capacitor/core": "^5.0.0"
-  },
-  "prettier": "@ionic/prettier-config",
-  "swiftlint": "@ionic/swiftlint-config",
-  "eslintConfig": {
-    "extends": "@ionic/eslint-config/recommended"
-  },
-  "capacitor": {
-    "ios": {
-      "src": "ios"
-    },
-    "android": {
-      "src": "android"
+  "author": "Thomas Gordon Lowrey IV",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer/blob/master/LICENSE"
     }
-  }
+  ],
+  "bugs": {
+    "url": "https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer/issues"
+  },
+  "homepage": "https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer#readme",
+  "license": "ISC"
 }

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="BrotherPrintLibrary">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/BrotherPrintLibrary.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
