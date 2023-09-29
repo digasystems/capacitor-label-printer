@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-brother-label-printer",
-  "version": "1.7.0",
-  "description": "Cordova and Capacitor plugin for brother label printers",
+  "name": "@digasystems/capacitor-label-printer",
+  "version": "0.0.1",
+  "description": "Provide a native interface to label printers",
   "cordova": {
-    "id": "cordova-plugin-brother-label-printer",
+    "id": "capacitor-label-printer",
     "platforms": [
       "android",
       "ios"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer.git"
+    "url": "git+https://github.com/digasystems/capacitor-label-printer"
   },
   "keywords": [
     "brother",
@@ -29,15 +29,10 @@
     "apple-ios": ">=10.0.0"
   },
   "author": "Thomas Gordon Lowrey IV",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer/blob/master/LICENSE"
-    }
-  ],
   "bugs": {
-    "url": "https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer/issues"
+    "url": "https://github.com/digasystems/capacitor-label-printer/issues"
   },
-  "homepage": "https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer#readme",
-  "license": "ISC"
+  "license": "MIT",
+  "homepage": "https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer#readme"
+
 }
