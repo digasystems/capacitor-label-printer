@@ -16,12 +16,12 @@ Already bundled is the following version:
 In your Cordova project, run the following command to install the plugin.
 
 ```
-cordova plugin add git+https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer
+cordova plugin add git+https://github.com/digasystems/capacitor-label-printer
 ```
 or
 
 ```
-cordova plugin add cordova-plugin-brother-label-printer
+cordova plugin add capacitor-label-printer
 ```
 
 And then read [usage](#usage) below.

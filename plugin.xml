@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-brother-label-printer"
-        version="1.7.0">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="capacitor-label-printer"
+    version="1.7.0">
 
     <name>BrotherPrinter</name>
 
     <description>Cordova hooks for Brother Print SDK</description>
-    <repo>https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer.git</repo>
+    <repo>https://github.com/digasystems/capacitor-label-printer.git</repo>
     <keywords>brother, sdk, print</keywords>
     <license></license>
 
-    <author>Thomas Gordon Lowrey IV</author>
+    <author>Diga Systems</author>
 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
@@ -28,20 +28,28 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="BrotherPrinter">
-                <param name="android-package" value="com.threescreens.cordova.plugin.brotherprinter.BrotherPrinter"/>
+                <param name="android-package"
+                    value="com.digasystems.cordova.plugin.brotherprinter.BrotherPrinter" />
             </feature>
         </config-file>
 
-        <source-file src="src/android/BrotherPrinter.java" target-dir="src/com/threescreens/cordova/plugin/brotherprinter" />
-        <source-file src="src/android/PrinterInputParameterConstant.java" target-dir="src/com/threescreens/cordova/plugin/brotherprinter" />
+        <source-file src="src/android/BrotherPrinter.java"
+            target-dir="src/com/digasystems/cordova/plugin/brotherprinter" />
+        <source-file src="src/android/PrinterInputParameterConstant.java"
+            target-dir="src/com/digasystems/cordova/plugin/brotherprinter" />
 
 
-        <source-file src="src/android/Common.java" target-dir="src/com/brother/ptouch/sdk/printdemo/common" />
-        <source-file src="src/android/MsgHandle.java" target-dir="src/com/brother/ptouch/sdk/printdemo/common" />
+        <source-file src="src/android/Common.java"
+            target-dir="src/com/brother/ptouch/sdk/printdemo/common" />
+        <source-file src="src/android/MsgHandle.java"
+            target-dir="src/com/brother/ptouch/sdk/printdemo/common" />
 
-        <source-file src="src/android/BasePrint.java" target-dir="src/com/brother/ptouch/sdk/printdemo/printprocess" />
-        <source-file src="src/android/ImageBitmapPrint.java" target-dir="src/com/brother/ptouch/sdk/printdemo/printprocess" />
-        <source-file src="src/android/ImageFilePrint.java" target-dir="src/com/brother/ptouch/sdk/printdemo/printprocess" />
+        <source-file src="src/android/BasePrint.java"
+            target-dir="src/com/brother/ptouch/sdk/printdemo/printprocess" />
+        <source-file src="src/android/ImageBitmapPrint.java"
+            target-dir="src/com/brother/ptouch/sdk/printdemo/printprocess" />
+        <source-file src="src/android/ImageFilePrint.java"
+            target-dir="src/com/brother/ptouch/sdk/printdemo/printprocess" />
 
         <source-file src="src/android/libs/BrotherPrintLibrary.jar" target-dir="libs" />
 
@@ -53,13 +61,13 @@
 
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
-            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
             <!--
                         <uses-permission android:name="android.permission.BLUETOOTH" android:required="false" />
                         <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:required="false" />
             -->
-            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.USB" android:required="false" />
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -70,16 +78,18 @@
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="BrotherPrinter">
-                <param name="ios-package" value="BrotherPrinter"/>
+                <param name="ios-package" value="BrotherPrinter" />
             </feature>
         </config-file>
 
         <!--
         Commenting these ExternalAccesory configs to avoid app being rejected from app store:
         MFi - Program Authorization
-        We are unable to post your app to the App Store at this time because your app has not been authorized by the accessory manufacturer to work with the MFi accessory.
+        We are unable to post your app to the App Store at this time because your app has not been
+        authorized by the accessory manufacturer to work with the MFi accessory.
         Next Steps
-        To resolve this issue, please contact the accessory manufacturer to request your app be added to the MFi Product Plan form.
+        To resolve this issue, please contact the accessory manufacturer to request your app be added to
+        the MFi Product Plan form.
         -->
         <!--
                 <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
@@ -89,11 +99,12 @@
                 </config-file>
                 <framework src="ExternalAccessory.framework" />
         -->
-        <!-- fixing for capacitor https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer/issues/51 -->    
+        <!-- fixing for capacitor
+        https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer/issues/51 -->
         <!-- <framework src="src/ios/libs/BRLMPrinterKit.framework" custom="true"/> -->
         <podspec>
             <config>
-                <source url="https://github.com/CocoaPods/Specs.git"/>
+                <source url="https://github.com/CocoaPods/Specs.git" />
             </config>
             <pods use-frameworks="true">
                 <pod name="BRLMPrinterKit" />

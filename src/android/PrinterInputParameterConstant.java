@@ -1,4 +1,4 @@
-package com.threescreens.cordova.plugin.brotherprinter;
+package com.digasystems.cordova.plugin.brotherprinter;
 
 public class PrinterInputParameterConstant {
     public static final String PRINTER_MODEL = "printerModel";

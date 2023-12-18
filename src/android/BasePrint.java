@@ -33,8 +33,8 @@ import com.brother.ptouch.sdk.printdemo.common.MsgHandle;
 import java.util.List;
 import java.util.Map;
 
-import static com.threescreens.cordova.plugin.brotherprinter.BrotherPrinter.TAG;
-import static com.threescreens.cordova.plugin.brotherprinter.PrinterInputParameterConstant.INCLUDE_BATTERY_STATUS;
+import static com.digasystems.cordova.plugin.brotherprinter.BrotherPrinter.TAG;
+import static com.digasystems.cordova.plugin.brotherprinter.PrinterInputParameterConstant.INCLUDE_BATTERY_STATUS;
 
 @SuppressWarnings("ALL")
 public abstract class BasePrint {

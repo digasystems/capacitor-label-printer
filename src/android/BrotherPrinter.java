@@ -1,4 +1,4 @@
-package com.threescreens.cordova.plugin.brotherprinter;
+package com.digasystems.cordova.plugin.brotherprinter;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -52,7 +52,7 @@ import com.brother.ptouch.sdk.PrinterStatus;
 import com.brother.ptouch.sdk.printdemo.common.MsgHandle;
 import com.brother.ptouch.sdk.printdemo.printprocess.ImageBitmapPrint;
 import com.brother.ptouch.sdk.printdemo.printprocess.ImageFilePrint;
-import static com.threescreens.cordova.plugin.brotherprinter.PrinterInputParameterConstant.INCLUDE_BATTERY_STATUS;
+import static com.digasystems.cordova.plugin.brotherprinter.PrinterInputParameterConstant.INCLUDE_BATTERY_STATUS;
 
 public class BrotherPrinter extends CordovaPlugin {
     //token to make it easy to grep logcat
@@ -511,7 +511,7 @@ public class BrotherPrinter extends CordovaPlugin {
                     return;
                 }
 
-                final String ACTION_USB_PERMISSION = "com.threescreens.cordova.plugin.brotherprinter.USB_PERMISSION";
+                final String ACTION_USB_PERMISSION = "com.digasystems.cordova.plugin.brotherprinter.USB_PERMISSION";
 
                 PendingIntent permissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0);
                 usbManager.requestPermission(usbDevice, permissionIntent);
