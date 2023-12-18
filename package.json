@@ -28,11 +28,10 @@
     "android-sdk": ">=26",
     "apple-ios": ">=10.0.0"
   },
-  "author": "Thomas Gordon Lowrey IV",
+  "author": "Diga Systems",
   "bugs": {
     "url": "https://github.com/digasystems/capacitor-label-printer/issues"
   },
   "license": "MIT",
   "homepage": "https://github.com/AbobosSoftware/cordova-plugin-brother-label-printer#readme"
-
 }
