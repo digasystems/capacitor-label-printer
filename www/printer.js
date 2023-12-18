@@ -1,4 +1,4 @@
-var BrotherPrinter = function () {}
+var BrotherPrinter = function () { }
 BrotherPrinter.prototype = {
     findNetworkPrinters: function (onSuccess, onError) {
         cordova.exec(onSuccess, onError, 'BrotherPrinter', 'findNetworkPrinters', [])
@@ -13,7 +13,7 @@ BrotherPrinter.prototype = {
     },
 
     setPrinter: function (printer, onSuccess, onError) {
-         if (cordova.platformId == 'ios' && printer['paperLabelName'] && printer['paperLabelName'].startsWith('W')) {
+        if (cordova.platformId == 'ios' && printer['paperLabelName'] && printer['paperLabelName'].startsWith('W')) {
             var iosLabelName = IOS_PAPER_LABEL_MAP[printer['paperLabelName']];
             if (iosLabelName) {
                 //console.log('Converting paperLabelName to ' + iosLabelName + ' for ios ');
@@ -54,14 +54,14 @@ const IOS_PAPER_LABEL_MAP = {
     W103: '103mm',
     W62RB: '62mmRB',
     W17H54: '17mmx54mm',
-    W17H87: '17mm87mm',
+    W17H87: '17mmx87mm',
     W23H23: '23mmx23mm',
     W29H42: '29mmx42mm',
     W29H90: '29mmx90mm',
     W38H90: '38mmx90mm',
     W39H48: '39mmx48mm',
     W52H29: '52mmx29mm',
-    W54H29: '54mm×29mm',
+    W54H29: '54mmx29mm',
     W60H86: '60mmx86mm',
     W62H29: '62mmx29mm',
     W62H100: '62mmx100mm',
